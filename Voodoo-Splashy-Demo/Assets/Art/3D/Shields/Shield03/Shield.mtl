@@ -1,0 +1,59 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# File Created: 10.12.2011 00:01:10
+
+newmtl HelmetMap
+	Ns 8.000000
+	Ni 1.500000
+	d 1.000000
+	Tr 0.000000
+	Tf 1.000000 1.000000 1.000000 
+	illum 2
+	Ka 0.764706 0.874510 0.874510
+	Kd 0.764706 0.874510 0.874510
+	Ks 1.010000 1.010000 1.010000
+	Ke 0.000000 0.000000 0.000000
+	map_bump Map__50_Normal_Bump.tga
+
+newmtl Material__101
+	Ns 10.000000
+	Ni 1.500000
+	d 1.000000
+	Tr 0.000000
+	Tf 1.000000 1.000000 1.000000 
+	illum 2
+	Ka 0.588000 0.588000 0.588000
+	Kd 0.588000 0.588000 0.588000
+	Ks 0.000000 0.000000 0.000000
+	Ke 0.000000 0.000000 0.000000
+	map_Ka D:\МояРабочаяПапка\3dsmax2011\scenes\Viking\Parts\Shield\Maps\ShieldFrMap.tga
+	map_Kd D:\МояРабочаяПапка\3dsmax2011\scenes\Viking\Parts\Shield\Maps\ShieldFrMap.tga
+	map_bump D:\МояРабочаяПапка\3dsmax2011\scenes\Viking\Parts\Shield\Maps\ShieldFrMap.tga
+	bump D:\МояРабочаяПапка\3dsmax2011\scenes\Viking\Parts\Shield\Maps\ShieldFrMap.tga
+
+newmtl Material__91
+	Ns 10.000000
+	Ni 1.500000
+	d 1.000000
+	Tr 0.000000
+	Tf 1.000000 1.000000 1.000000 
+	illum 2
+	Ka 0.435294 0.309804 0.227451
+	Kd 0.435294 0.309804 0.227451
+	Ks 0.000000 0.000000 0.000000
+	Ke 0.000000 0.000000 0.000000
+
+newmtl Material__102
+	Ns 10.000000
+	Ni 1.500000
+	d 1.000000
+	Tr 0.000000
+	Tf 1.000000 1.000000 1.000000 
+	illum 2
+	Ka 0.588000 0.588000 0.588000
+	Kd 0.588000 0.588000 0.588000
+	Ks 0.000000 0.000000 0.000000
+	Ke 0.000000 0.000000 0.000000
+	map_Ka D:\МояРабочаяПапка\3dsmax2011\scenes\Viking\Parts\Shield\Maps\ShieldBackMap.tga
+	map_Kd D:\МояРабочаяПапка\3dsmax2011\scenes\Viking\Parts\Shield\Maps\ShieldBackMap.tga
+	map_bump D:\МояРабочаяПапка\3dsmax2011\scenes\Viking\Parts\Shield\Maps\ShieldBackMap.tga
+	bump D:\МояРабочаяПапка\3dsmax2011\scenes\Viking\Parts\Shield\Maps\ShieldBackMap.tga
