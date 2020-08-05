@@ -5,10 +5,10 @@ using UnityEngine;
 public class ProgressionData : Singleton<ProgressionData>
 {
 	[SerializeField]
-	private int[] RarityUpgradeCosts;
+	private int[] RarityUpgradeCosts = null;
 	[SerializeField]
 	[ColorUsage(true, true)]
-	private Color[] RarityColor;
+	private Color[] RarityColor = null;
 	[SerializeField]
 	private Sprite[] m_SwordSprites = null;
 	public Sprite GetNextRarityImage()

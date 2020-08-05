@@ -39,8 +39,8 @@ public class ScoreUIView : MonoBehaviour
 
 	}
 
-	private void ShowBestScore()
+	public void ShowBestScore()
 	{
-		ChangeScoreText(string.Format("Best:{0}", ScoreManager.Instance.BestScore));
+		ChangeScoreText(string.Format("BEST:{0}", ScoreManager.Instance.BestScore));
 	}
 }

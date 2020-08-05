@@ -29,15 +29,28 @@ public class PlayerBounceManager : MonoBehaviour
     private Vector3 m_TouchPosition;
     private bool m_Downstroke = false;
     private bool m_IsColliding = false;
-    // Start is called before the first frame update
+    private Vector3 m_StartingLocation;
+
     void Start()
     {
         m_StartHeight = m_SwordBody.position.y+m_BounceHeight;
+        m_StartingLocation = m_SwordBody.transform.position;
         m_MaxHeight = m_StartHeight + m_BounceHeight;
     }
 
-    // Update is called once per frame
-    void LateUpdate()
+	private void OnEnable()
+	{
+        GameLoopManager.Reset += Reinitialize;
+	}
+
+	private void OnDisable()
+	{
+        if (GameLoopManager.Instance != null)
+        {
+            GameLoopManager.Reset -= Reinitialize;
+        }
+    }
+	void LateUpdate()
     {
 #if UNITY_EDITOR
         if (Input.GetMouseButtonDown(0))
@@ -139,6 +152,12 @@ public class PlayerBounceManager : MonoBehaviour
         AudioManager.Instance.PlaySFX(m_DeathSFX, 0.4f);
         AudioManager.Instance.PlaySFX(m_DeathCrySFX[UnityEngine.Random.Range(0, m_DeathCrySFX.Length)]);
         PlayerLose?.Invoke();
-        Debug.Log("Failed with gap of " + TimingManager.Instance.CurrentGapDuration);
+        //Debug.Log("Failed with gap of " + TimingManager.Instance.CurrentGapDuration);
+    }
+
+    private void Reinitialize()
+	{
+        m_StartHeight = m_SwordBody.position.y + m_BounceHeight;
+        m_SwordBody.transform.position = m_StartingLocation;
     }
 }

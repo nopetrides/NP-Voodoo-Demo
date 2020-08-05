@@ -21,7 +21,10 @@ public class ProgressionManager : Singleton<ProgressionManager>
 		}
 		Color c = ProgressionData.Instance.GetColorForRarity(rarity);
 
-		m_PlayerSpriteMat.SetColor("_Color", c);
+		if (rarity > 1) // leave default sprit mat if just rarity 1
+		{
+			m_PlayerSpriteMat.SetColor("_Color", c);
+		}
 		m_PlayerLight.color = c;
 	}
 

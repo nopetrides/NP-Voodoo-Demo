@@ -6,9 +6,9 @@ using UnityEngine;
 public class UISlidingAnimation : MonoBehaviour
 {
 	[SerializeField]
-	private AnimationCurve m_Curve;
+	private AnimationCurve m_Curve = null;
 	[SerializeField]
-	private RectTransform m_ParentRect;
+	private RectTransform m_ParentRect = null;
 
 	private float m_ParentWidth;
 	private float m_AnimTimer = 0.0f;

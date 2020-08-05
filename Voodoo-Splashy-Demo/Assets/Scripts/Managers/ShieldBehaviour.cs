@@ -15,7 +15,7 @@ public class ShieldBehaviour : MonoBehaviour
 	[SerializeField]
 	private int m_SpawnChance = 2; // 1 in N spawn chance
 	[SerializeField]
-	private Vector2 m_XRangeOnShieldPickups;
+	private Vector2 m_XRangeOnShieldPickups = new Vector2();
 	[SerializeField]
 	private BoxCollider m_Collider = null;
 	public BoxCollider Collider { get { return m_Collider; } }
@@ -161,4 +161,12 @@ public class ShieldBehaviour : MonoBehaviour
 			}
 		}
 	}
+#if UNITY_EDITOR
+	void OnDrawGizmos()
+	{
+		// Draw a yellow sphere at the transform's position
+		Gizmos.color = Color.yellow;
+		Gizmos.DrawWireCube(transform.position, Collider.size);
+	}
+#endif
 }

@@ -26,11 +26,20 @@ public class TimingManager : Singleton<TimingManager>
 	private bool m_TimerRunning = false;
 	public bool TimerRunning { get { return m_TimerRunning;}}
 
+	private void OnEnable()
+	{
+		m_Player.PlayerLose += End;
+	}
+
+	private void OnDisable()
+	{
+		m_Player.PlayerLose -= End;
+	}
+
 	public void Begin()
 	{
-		m_CurrentGapDuration = m_BaseGapDuration;
 		m_TimerRunning = true;
-		m_Player.PlayerLose += End;
+		ResetTimer();
 	}
 
 	public void Update()
@@ -54,6 +63,13 @@ public class TimingManager : Singleton<TimingManager>
 	public void End()
 	{
 		m_TimerRunning = false;
+		ResetTimer();
+	}
+
+	private void ResetTimer()
+	{
+		m_CurrentGapDuration = m_BaseGapDuration;
+		m_GapTimer = m_CurrentGapDuration / 2;
 	}
 
 	public bool IsInFirstHalf()

@@ -6,9 +6,9 @@ public class EnemyAnimationController : MonoBehaviour
 {
 
 	[SerializeField]
-	private Animator m_Animator;
+	private Animator m_Animator = null;
 	[SerializeField]
-	private PlayerBounceManager m_PlayerManager;
+	private PlayerBounceManager m_PlayerManager = null;
 
 	private bool m_Defending = false;
 	private void OnEnable()

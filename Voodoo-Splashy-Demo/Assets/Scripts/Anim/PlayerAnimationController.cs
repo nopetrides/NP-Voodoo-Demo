@@ -5,9 +5,9 @@ using UnityEngine;
 public class PlayerAnimationController : MonoBehaviour
 {
 	[SerializeField]
-	private Animator m_Animator;
+	private Animator m_Animator = null;
 	[SerializeField]
-	private PlayerBounceManager m_PlayerManager;
+	private PlayerBounceManager m_PlayerManager = null;
 
 	private bool m_Attacking = false;
 	private void OnEnable()
@@ -15,6 +15,7 @@ public class PlayerAnimationController : MonoBehaviour
 		m_PlayerManager.PlayerLose += PlayerDied;
 		m_PlayerManager.TapToBegin += Begin;
 		m_PlayerManager.PlayerBounceCheck += PlayerBounce;
+		GameLoopManager.Reset += BackToIdle;
 	}
 
 	private void OnDisable()
@@ -22,6 +23,7 @@ public class PlayerAnimationController : MonoBehaviour
 		m_PlayerManager.PlayerLose -= PlayerDied;
 		m_PlayerManager.TapToBegin -= Begin;
 		m_PlayerManager.PlayerBounceCheck -= PlayerBounce;
+		GameLoopManager.Reset -= BackToIdle;
 	}
 
 	private void Begin()
@@ -42,5 +44,11 @@ public class PlayerAnimationController : MonoBehaviour
 	{
 		m_Attacking = false;
 		m_Animator.SetTrigger("Died");
+		m_Animator.ResetTrigger("Hit");
+	}
+
+	private void BackToIdle()
+	{
+		m_Animator.SetTrigger("Reset");
 	}
 }

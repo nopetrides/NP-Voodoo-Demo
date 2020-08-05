@@ -7,9 +7,6 @@ using UnityEngine.UI;
 public class ReadyUIView : MonoBehaviour
 {
 	[SerializeField]
-	private ScoreUIView m_ScoreUI = null;
-
-	[SerializeField]
 	private Button m_BuyUpgradeButton = null;
 	[SerializeField]
 	private Image m_NextRarityWeaponImage = null;

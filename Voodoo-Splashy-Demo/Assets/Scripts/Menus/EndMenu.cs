@@ -2,11 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EndMenu : MonoBehaviour
 {
 	[SerializeField]
 	private RectTransform m_ScoreParent = null;
+	[SerializeField]
+	private Image m_FadeToBlack = null;
 
 	private bool m_AnimatingScore = false;
 	private float m_AnimationTimer = 0.0f;
@@ -18,11 +21,16 @@ public class EndMenu : MonoBehaviour
 		m_ScoreOriginalPos = m_ScoreParent.localPosition;
 		m_ScoreNewPos = new Vector2(0,0);
 		m_AnimationTimer = 0.0f;
+		Color c = m_FadeToBlack.color;
+		c.a = 0;
+		m_FadeToBlack.color = c;
+		StartCoroutine(FadeToBlack());
 	}
 
 	private void OnDisable()
 	{
 		m_AnimatingScore = false;
+		m_ScoreParent.localPosition = m_ScoreOriginalPos;
 	}
 
 	// Update is called once per frame
@@ -40,6 +48,19 @@ public class EndMenu : MonoBehaviour
 				m_AnimatingScore = false;
 			}
 		}
-
     }
+
+	IEnumerator FadeToBlack()
+	{
+		yield return new WaitForSeconds(1);
+		float deltatime = 0.0f;
+		while (deltatime < 2.0f)
+		{
+			deltatime += Time.deltaTime;
+			Color c = m_FadeToBlack.color;
+			c.a = Mathf.Lerp(0, 1, deltatime/2.0f);
+			m_FadeToBlack.color = c;
+			yield return null;
+		}
+	}
 }

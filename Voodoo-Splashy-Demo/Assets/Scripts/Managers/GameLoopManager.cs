@@ -14,6 +14,8 @@ public class GameLoopManager : Singleton<GameLoopManager>
 	private PlayerBounceManager m_PlayerManager = null;
 	[SerializeField]
 	private GameObject m_ArtBGObject = null;
+	[SerializeField]
+	private int m_SecondsUntilReset = 5;
 
 	public enum GameState
 	{
@@ -25,26 +27,26 @@ public class GameLoopManager : Singleton<GameLoopManager>
 	private GameState m_State = GameState.Ready;
 	public GameState State { get { return m_State; } }
 
-	bool m_Update = false;
+	public static event Action Reset;
+
     // Start is called before the first frame update
     void Start()
-    {
-        OnSetup();
-        ReadyStateSetup();
+	{
 		m_ArtBGObject.SetActive(true);
-    }
+		OnSetup();
+        ReadyStateSetup();
+	}
 
 
     void OnSetup()
 	{
 		// Setup/reset player states
-		ProgressionManager.Instance.SetupRarity();
+		ResetGameManager();
 		WaitForInput();
 	}
 
     void ReadyStateSetup()
 	{
-        m_Update = false;
 		m_State = GameState.Ready;
 		m_CompleteMenu.SetActive(false);
 		m_ReadyParent.SetActive(true);
@@ -67,12 +69,27 @@ public class GameLoopManager : Singleton<GameLoopManager>
 	{
 		m_State = GameState.Complete;
 		m_CompleteMenu.SetActive(true);
+		StartCoroutine(GameOverWait());
+	}
+
+	IEnumerator GameOverWait()
+	{
+		yield return new WaitForSeconds(m_SecondsUntilReset);
+		Reset?.Invoke();
+		ResetGameManager();
+	}
+
+	private void ResetGameManager()
+	{
+		ReadyStateSetup();
+		ProgressionManager.Instance.SetupRarity();
 	}
 
 
 	private void OnDisable()
 	{
-		m_PlayerManager.TapToBegin -= GameStateMainBegin;
+		m_PlayerManager.TapToBegin -= GameStateMainBegin; 
+		m_PlayerManager.PlayerLose -= GameStateOver;
 	}
 
 	public void BackgroundTapped()

@@ -6,8 +6,6 @@ using UnityEngine;
 public class ScoreManager : Singleton<ScoreManager>
 {
     [SerializeField]
-    private PlayerBounceManager m_Player = null;
-    [SerializeField]
     private  ScoreUIView m_ScoreUI = null;
 
     const string BEST_SCORE_PREF_KEY = "BEST_SCORE_PREF";
@@ -29,7 +27,17 @@ public class ScoreManager : Singleton<ScoreManager>
         m_CurrentScore = 0;
     }
 
-    public void AddScore(int pointsEarned)
+	private void OnEnable()
+	{
+        GameLoopManager.Reset += ResetScore;
+    }
+
+	private void OnDisable()
+    {
+        GameLoopManager.Reset -= ResetScore;
+    }
+
+	public void AddScore(int pointsEarned)
 	{
         pointsEarned *= CurrentMultiplier;
         m_CurrentScore += pointsEarned;
@@ -78,11 +86,15 @@ public class ScoreManager : Singleton<ScoreManager>
 
     private void UpdateScoreUI(int earned = -1)
 	{
-        if (earned > 0)
+		if (earned > 0)
 		{
-            m_ScoreUI.ScoreOverlayText(earned);
-        }
-        m_ScoreUI.ChangeScoreText(m_CurrentScore.ToString());
+			m_ScoreUI.ScoreOverlayText(earned);
+			m_ScoreUI.ChangeScoreText(m_CurrentScore.ToString());
+		}
+		else
+		{
+            m_ScoreUI.ShowBestScore();
+		}
 	}
 
     private void UpdateMoneyUI()
